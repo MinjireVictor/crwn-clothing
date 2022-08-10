@@ -7,7 +7,16 @@ import {getAuth,
     signInWithEmailAndPassword,
     onAuthStateChanged,
     signOut} from 'firebase/auth'
-import {getFirestore,doc,getDoc,setDoc} from 'firebase/firestore'
+import {getFirestore,
+    doc,
+    getDoc,
+    setDoc,
+    collection,
+    writeBatch,
+    query,
+    getDocs
+
+} from 'firebase/firestore'
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
@@ -52,6 +61,27 @@ const firebaseConfig = {
       return userDocRef
 
   }
+
+  export const addCollectionAndDocument=async(collectionKey, objectsToAdd)=>{
+    const collectionRef=collection(db,collectionKey)
+    const bacth=writeBatch(db)
+   
+}
+
+export const getCategoriesAndDocuments=async()=>{
+    const collectionRef=collection(db, 'categories')
+    const q=query(collectionRef)
+    const querySnapshot=await getDocs(q)
+    const categoryMap=querySnapshot.docs.reduce((acc,docSnapshot)=>{
+        const {title, items}=docSnapshot.data()
+        acc[title.toLowerCase()]=items
+        return acc
+        
+
+    },{})
+    return categoryMap;
+    
+}
 
   export const createAuthUserWithEmailAndPassword=async(email, password)=>{
       if(!email||!password)return

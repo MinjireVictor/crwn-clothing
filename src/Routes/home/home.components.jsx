@@ -6,7 +6,7 @@ const categories=[
   {
     "id": 1,
     "title": "hats",
-    "imageUrl": "https://i.ibb.co/cvpntL1/hats.png"
+    "imageUrl": "https://i.pinimg.com/originals/fb/97/a3/fb97a33a544bbae8baf6470dfc433527.jpg"
   },
   {
     "id": 2,

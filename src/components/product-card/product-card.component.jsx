@@ -1,8 +1,8 @@
-import './product-card.styles.scss'
-import Button from '../../button/button-component';
+import { ProductCardContainer, Footer, ImageStyles,InvertedButton} from './product-card.styles';
+import Button, {BUTTON_TYPE_CLASS} from '../button/button-component';
 import {useContext} from 'react'
+import { getButton } from '../button/button-component';
 import { CartContext } from '../../context/cart.context'; 
-
 
 const ProductCard=({product})=>{
     const {name, price, imageUrl}=product;
@@ -11,16 +11,18 @@ const ProductCard=({product})=>{
         addItemToCart(product)
         console.log('Product card', product)
     }
-    return(
-        <div className='product-card-container'>
-            <img src={imageUrl} alt={`${name}`}/>
-            <div className='footer'>
-                <span>{name}</span>
-                <span>{price}</span>
-            </div>
-            <Button buttonType='inverted' onClick={addProductToCart}>Add To Cart</Button>
 
-        </div>
+    const CustomButton=getButton(BUTTON_TYPE_CLASS.inverted)
+    return(
+        <ProductCardContainer>
+            <ImageStyles src={imageUrl} alt={`${name}`}/>
+            <Footer>
+                <span className='name'>{name}</span>
+                <span className='price'>{price}</span>
+            </Footer>
+            <CustomButton style={{marginTop:20}} onClick={addProductToCart}>Add To Cart</CustomButton>
+
+        </ProductCardContainer>
     )
 }
 
